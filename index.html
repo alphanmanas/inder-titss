@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>UİTS - Türkiye İnşaat Tedarik Sistemi</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f7fb;
+margin:0;
+padding:20px;
+}
+
+h1{
+font-size:32px;
+margin-bottom:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+}
+
+.card{
+background:#e63946;
+color:white;
+padding:15px;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+text-align:center;
+}
+
+.card:hover{
+background:#c92f3a;
+}
+
+.subgrid{
+margin-top:20px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+}
+
+.sub{
+background:#457b9d;
+color:white;
+padding:10px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.var{
+margin-top:15px;
+background:white;
+padding:10px;
+border-left:5px solid #e63946;
+margin-bottom:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Türkiye İnşaat Tedarik Sistemi</h1>
+
+<div class="grid">
+
+<div class="card" onclick="load('beton')">03 – Beton</div>
+<div class="card" onclick="load('celik')">05 – Metal & Çelik</div>
+<div class="card" onclick="load('izolasyon')">07 – İzolasyon</div>
+<div class="card" onclick="load('kapi')">08 – Kapı & Pencere</div>
+<div class="card" onclick="load('finishes')">09 – İç Kaplama</div>
+<div class="card" onclick="load('mekanik')">15 – Mekanik</div>
+<div class="card" onclick="load('elektrik')">17 – Elektrik</div>
+<div class="card" onclick="load('altyapi')">19 – Altyapı</div>
+
+</div>
+
+<div id="sub"></div>
+<div id="var"></div>
+
+<script>
+
+function load(x){
+
+let sub=document.getElementById("sub")
+let varbox=document.getElementById("var")
+varbox.innerHTML=""
+
+if(x=="beton"){
+sub.innerHTML=`
+<div class="subgrid">
+<div class="sub" onclick="varload('hazirbeton')">Hazır Beton</div>
+<div class="sub" onclick="varload('precast')">Prekast</div>
+<div class="sub" onclick="varload('katki')">Katkı Kimyasalları</div>
+</div>`
+}
+
+if(x=="celik"){
+sub.innerHTML=`
+<div class="subgrid">
+<div class="sub" onclick="varload('demir')">İnşaat Demiri</div>
+<div class="sub" onclick="varload('profil')">Profil Çelik</div>
+<div class="sub" onclick="varload('ankraj')">Ankraj</div>
+</div>`
+}
+
+if(x=="izolasyon"){
+sub.innerHTML=`
+<div class="subgrid">
+<div class="sub" onclick="varload('membran')">Membran</div>
+<div class="sub" onclick="varload('bitum')">Bitüm</div>
+<div class="sub" onclick="varload('poli')">Poliüretan</div>
+</div>`
+}
+
+if(x=="kapi"){
+sub.innerHTML=`
+<div class="subgrid">
+<div class="sub" onclick="varload('alum')">Alüminyum</div>
+<div class="sub" onclick="varload('pvc')">PVC</div>
+<div class="sub" onclick="varload('celikkapi')">Çelik Kapı</div>
+</div>`
+}
+
+if(x=="finishes"){
+sub.innerHTML=`
+<div class="subgrid">
+<div class="sub" onclick="varload('boya')">Boya</div>
+<div class="sub" onclick="varload('seramik')">Seramik</div>
+<div class="sub" onclick="varload('parke')">Parke</div>
+</div>`
+}
+
+if(x=="mekanik"){
+sub.innerHTML=`
+<div class="subgrid">
+<div class="sub" onclick="varload('vrf')">VRF</div>
+<div class="sub" onclick="varload('chiller')">Chiller</div>
+<div class="sub" onclick="varload('klima')">Klima</div>
+</div>`
+}
+
+if(x=="elektrik"){
+sub.innerHTML=`
+<div class="subgrid">
+<div class="sub" onclick="varload('kablo')">Kablo</div>
+<div class="sub" onclick="varload('pano')">Pano</div>
+<div class="sub" onclick="varload('trafo')">Trafo</div>
+</div>`
+}
+
+if(x=="altyapi"){
+sub.innerHTML=`
+<div class="subgrid">
+<div class="sub" onclick="varload('bordur')">Bordür</div>
+<div class="sub" onclick="varload('kanal')">Kanalizasyon</div>
+<div class="sub" onclick="varload('sulama')">Sulama</div>
+</div>`
+}
+
+}
+
+function varload(x){
+
+let varbox=document.getElementById("var")
+
+if(x=="hazirbeton"){
+varbox.innerHTML=`<div class="var">C30</div><div class="var">C35</div><div class="var">C40</div>`
+}
+
+if(x=="precast"){
+varbox.innerHTML=`<div class="var">Prekast Kiriş</div><div class="var">Prekast Panel</div>`
+}
+
+if(x=="katki"){
+varbox.innerHTML=`<div class="var">Akışkanlaştırıcı</div><div class="var">Priz Geciktirici</div>`
+}
+
+if(x=="demir"){
+varbox.innerHTML=`<div class="var">B420C</div><div class="var">Hasır Çelik</div>`
+}
+
+if(x=="profil"){
+varbox.innerHTML=`<div class="var">IPE</div><div class="var">HEA</div>`
+}
+
+if(x=="ankraj"){
+varbox.innerHTML=`<div class="var">Kimyasal Ankraj</div>`
+}
+
+if(x=="membran"){
+varbox.innerHTML=`<div class="var">Bitümlü Membran</div><div class="var">PVC Membran</div>`
+}
+
+if(x=="bitum"){
+varbox.innerHTML=`<div class="var">Sıcak Bitüm</div>`
+}
+
+if(x=="poli"){
+varbox.innerHTML=`<div class="var">Sprey Köpük</div>`
+}
+
+if(x=="alum"){
+varbox.innerHTML=`<div class="var">Alüminyum Doğrama</div>`
+}
+
+if(x=="pvc"){
+varbox.innerHTML=`<div class="var">PVC Pencere</div>`
+}
+
+if(x=="celikkapi"){
+varbox.innerHTML=`<div class="var">Çelik Kapı</div>`
+}
+
+if(x=="boya"){
+varbox.innerHTML=`<div class="var">İç Cephe Boyası</div>`
+}
+
+if(x=="seramik"){
+varbox.innerHTML=`<div class="var">Duvar Seramiği</div>`
+}
+
+if(x=="parke"){
+varbox.innerHTML=`<div class="var">Laminat Parke</div>`
+}
+
+if(x=="vrf"){
+varbox.innerHTML=`<div class="var">VRF Sistem</div>`
+}
+
+if(x=="chiller"){
+varbox.innerHTML=`<div class="var">Chiller</div>`
+}
+
+if(x=="klima"){
+varbox.innerHTML=`<div class="var">Split Klima</div>`
+}
+
+if(x=="kablo"){
+varbox.innerHTML=`<div class="var">NYY Kablo</div>`
+}
+
+if(x=="pano"){
+varbox.innerHTML=`<div class="var">Dağıtım Panosu</div>`
+}
+
+if(x=="trafo"){
+varbox.innerHTML=`<div class="var">Trafo</div>`
+}
+
+if(x=="bordur"){
+varbox.innerHTML=`<div class="var">Beton Bordür</div>`
+}
+
+if(x=="kanal"){
+varbox.innerHTML=`<div class="var">Kanalizasyon Borusu</div>`
+}
+
+if(x=="sulama"){
+varbox.innerHTML=`<div class="var">Damla Sulama</div>`
+}
+
+}
+
+</script>
+
+</body>
+</html>
