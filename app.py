@@ -6,9 +6,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# -----------------------------
-# DATA
-# -----------------------------
 DATA = {
     "01 – Genel & Şantiye": {
         "Geçici Yapılar": ["Konteyner Ofis", "Geçici Depo", "Geçici Barınma Ünitesi"],
@@ -107,18 +104,12 @@ DATA = {
     },
 }
 
-# -----------------------------
-# SESSION
-# -----------------------------
 if "selected_group" not in st.session_state:
     st.session_state.selected_group = None
 
 if "selected_sub" not in st.session_state:
     st.session_state.selected_sub = None
 
-# -----------------------------
-# HELPERS
-# -----------------------------
 def total_sub_count():
     return sum(len(subs) for subs in DATA.values())
 
@@ -152,9 +143,6 @@ def filter_data(query: str):
 
     return filtered
 
-# -----------------------------
-# STYLE
-# -----------------------------
 st.markdown("""
 <style>
 .block-container {
@@ -162,20 +150,17 @@ st.markdown("""
     padding-bottom: 2rem;
     max-width: 1450px;
 }
-
 .main-title {
     font-size: 2.2rem;
     font-weight: 800;
     color: #1f2937;
     margin-bottom: 0.25rem;
 }
-
 .main-subtitle {
-    font-size: 1.0rem;
+    font-size: 1rem;
     color: #6b7280;
     margin-bottom: 1.5rem;
 }
-
 .metric-box {
     background: white;
     border-radius: 16px;
@@ -184,20 +169,17 @@ st.markdown("""
     box-shadow: 0 6px 18px rgba(0,0,0,0.06);
     border: 1px solid #eef2f7;
 }
-
 .metric-title {
     font-size: 0.9rem;
     color: #6b7280;
     margin-bottom: 8px;
     font-weight: 600;
 }
-
 .metric-value {
     font-size: 1.8rem;
     font-weight: 800;
     color: #e63946;
 }
-
 .section-box {
     background: white;
     border-radius: 18px;
@@ -206,20 +188,17 @@ st.markdown("""
     border: 1px solid #eef2f7;
     margin-top: 18px;
 }
-
 .section-title {
     font-size: 1.3rem;
     font-weight: 800;
     margin-bottom: 14px;
     color: #1f2937;
 }
-
 .path-text {
     color: #6b7280;
     font-size: 0.92rem;
     margin-bottom: 10px;
 }
-
 .var-box {
     background: #f8fafc;
     border-left: 6px solid #e63946;
@@ -228,7 +207,6 @@ st.markdown("""
     margin-bottom: 10px;
     font-weight: 600;
 }
-
 .stButton > button {
     width: 100%;
     border-radius: 14px;
@@ -240,28 +218,20 @@ st.markdown("""
     color: white;
     box-shadow: 0 8px 20px rgba(0,0,0,0.10);
 }
-
 .stButton > button:hover {
     color: white;
     border: none;
     opacity: 0.95;
 }
-
 input {
     border-radius: 12px !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
-# -----------------------------
-# HEADER
-# -----------------------------
 st.markdown('<div class="main-title">Türkiye İnşaat Tedarik Sınıflandırma Sistemi</div>', unsafe_allow_html=True)
 st.markdown('<div class="main-subtitle">MasterFormat Tabanlı Demo Dashboard</div>', unsafe_allow_html=True)
 
-# -----------------------------
-# METRICS
-# -----------------------------
 m1, m2, m3, m4 = st.columns(4)
 
 with m1:
@@ -292,9 +262,6 @@ with m4:
         unsafe_allow_html=True
     )
 
-# -----------------------------
-# SEARCH
-# -----------------------------
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">20 Ana Grup</div>', unsafe_allow_html=True)
 
@@ -315,13 +282,10 @@ for i in range(0, len(group_names), 4):
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# -----------------------------
-# SUBS
-# -----------------------------
 if st.session_state.selected_group and st.session_state.selected_group in DATA:
     st.markdown('<div class="section-box">', unsafe_allow_html=True)
     st.markdown(
-        f'<div class="path-text">Ana Grup > {st.session_state.selected_group}</div>',
+        f'<div class="path-text">Ana Grup &gt; {st.session_state.selected_group}</div>',
         unsafe_allow_html=True
     )
     st.markdown('<div class="section-title">SUB Gruplar</div>', unsafe_allow_html=True)
@@ -334,14 +298,11 @@ if st.session_state.selected_group and st.session_state.selected_group in DATA:
 
         for j, sub in enumerate(row_subs):
             with cols[j]:
-                if st.button(sub, key=f"sub_{sub}"):
+                if st.button(sub, key=f"sub_{st.session_state.selected_group}_{sub}"):
                     st.session_state.selected_sub = sub
 
     st.markdown('</div>', unsafe_allow_html=True)
 
-# -----------------------------
-# VARS
-# -----------------------------
 if (
     st.session_state.selected_group
     and st.session_state.selected_sub
@@ -350,7 +311,7 @@ if (
 ):
     st.markdown('<div class="section-box">', unsafe_allow_html=True)
     st.markdown(
-        f'<div class="path-text">Ana Grup > {st.session_state.selected_group} > {st.session_state.selected_sub}</div>',
+        f'<div class="path-text">Ana Grup &gt; {st.session_state.selected_group} &gt; {st.session_state.selected_sub}</div>',
         unsafe_allow_html=True
     )
     st.markdown('<div class="section-title">VAR Listesi</div>', unsafe_allow_html=True)
